@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{params.desc}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="showList">
+    <ion-item *ngFor="let list of arrList">
+      <ion-grid>
+        <ion-row class="ion-border-bottom">
+          <ion-col size="6" class="ion-text-center">
+            <img width="80px" src="{{list.image}}" />
+            <ion-label class="ion-text-wrap">{{list.item}}</ion-label>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Stok Bagus</ion-label>
+              <ion-input
+                [(ngModel)]="bagus[list.code]"
+                type="number"
+                autocomplete="off"
+                (ionChange)="cekMaxItem($event, list.code,'bagus')"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Stok Rusak</ion-label>
+              <ion-input
+                [(ngModel)]="rusak[list.code]"
+                type="number"
+                autocomplete="off"
+                (ionChange)="cekMaxItem($event, list.code,'rusak')"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="!showList" class="scroll-content">
+    <ion-list>
+      <ion-item *ngFor="let flist of fakeList">
+        <ion-label>
+          <ion-grid>
+            <ion-row class="ion-border-bottom">
+              <ion-col size="6">
+                <ion-skeleton-text
+                  animated
+                  style="width: 80px; height: 80px; margin-left: 25%"
+                ></ion-skeleton-text>
+                <ion-skeleton-text
+                  animated
+                  style="width: 80%; margin-left: 10%"
+                ></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item>
+                  <ion-skeleton-text
+                    animated
+                    style="width: 100%"
+                  ></ion-skeleton-text>
+                </ion-item>
+                <ion-item>
+                  <ion-skeleton-text
+                    animated
+                    style="width: 100%"
+                  ></ion-skeleton-text>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="full" color="success" (click)="confimData()"
+          >{{labelForm}}</ion-button
+        >
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" color="danger" (click)="myBackButton()"
+          >Batal</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mulai Visit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input [(ngModel)]="jamAwal" type="text" required autocomplete="off" readonly></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-grid class="ion-no-padding" >
+    <ion-row >
+      <ion-col size="6" >
+        <ion-button expand="full" color="success" (click)="confimData('ok')" >Simpan</ion-button>  
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" color="danger" (click)="myBackButton()" >Batal</ion-button>  
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+</ion-footer>

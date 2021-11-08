@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +24,35 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-header ion-toolbar {
+  // position: relative;
+  // --background: linear-gradient(180deg, rgb(0, 128, 0) 0%, rgba(206, 238, 214, 0.2) 300%);
+  // --ion-color-base: transparent !important;
+  --background: green;
+  // border-radius: 0 0 8px 8px;
+  ion-title {
+    color: #ffffff;
+  }
+  ion-icon {
+    color: #ffffff;
+  }
+  ion-button {
+    color: #ffffff;
+  }
+  ion-back-button {
+    color: #ffffff;
+  }
+}
+
+.copyText {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+.myToast {
+  --min-height: 60px !important;
+  --border-radius: 20px;
+}

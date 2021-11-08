@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Preview Survey</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-margin">
+  <ion-refresher
+    slot="fixed"
+    pullFactor="0.5"
+    pullMin="100"
+    pullMax="100"
+    (ionRefresh)="refreshData($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="ion-no-padding" style="margin: 0 100px 0 0px">
+    <ion-item class="ion-margin" lines="none">
+      <ion-text class="ion-text-wrap"><h2>{{outlet}}</h2></ion-text>
+    </ion-item>
+  </div>
+  <ion-grid class="ion-margin" *ngIf="showList">
+    <ion-row>
+      <ion-col size="9" class="ion-text-center">Pertanyaan</ion-col>
+      <ion-col size="3" class="ion-text-center">Jawab</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let list of arrList">
+      <ion-col size="9">{{list.desc}}</ion-col>
+      <ion-col size="3" class="ion-text-center">{{list.is_yes}}</ion-col>
+    </ion-row>
+  </ion-grid>
+  <div *ngIf="!showList" class="scroll-content">
+    <ion-grid class="ion-margin">
+      <ion-row>
+        <ion-col size="9" class="ion-text-center"
+          ><ion-skeleton-text animated style="width: 50%"></ion-skeleton-text
+        ></ion-col>
+        <ion-col size="3" class="ion-text-center"
+          ><ion-skeleton-text animated style="width: 50%"></ion-skeleton-text
+        ></ion-col>
+      </ion-row>
+      <ion-row *ngFor="let flist of fakeList">
+        <ion-col size="9"
+          ><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text
+        ></ion-col>
+        <ion-col size="3" class="ion-text-center"
+          ><ion-skeleton-text animated style="width: 50%"></ion-skeleton-text
+        ></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

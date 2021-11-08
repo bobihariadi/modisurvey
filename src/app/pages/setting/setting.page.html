@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>setting</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Server Address</ion-label>
+    <ion-input [(ngModel)]="serverAddress" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Port</ion-label>
+    <ion-input [(ngModel)]="port" type="text"></ion-input>
+  </ion-item>
+  <ion-grid class="ion-margin-top">
+    <ion-row>
+      <ion-col>
+        <ion-button
+          color="success"
+          shape="round"
+          expand="full"
+          (click)="saveForm()"
+        >
+          Save
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button
+          color="success"
+          shape="round"
+          expand="full"
+          (click)="goBack()"
+        >
+          Back
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

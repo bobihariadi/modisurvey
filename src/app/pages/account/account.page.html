@@ -1,0 +1,72 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <img src="assets/shapes.svg" />
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding">
+      <ion-col size="12">
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Type</ion-label>
+          <ion-input [(ngModel)]="type" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">User ID</ion-label>
+          <ion-input [(ngModel)]="userID" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Nama</ion-label>
+          <ion-input [(ngModel)]="nama" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Area</ion-label>
+          <ion-input [(ngModel)]="area" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Route</ion-label>
+          <ion-input [(ngModel)]="route" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">No HP</ion-label>
+          <ion-input [(ngModel)]="hp" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Password</ion-label>
+          <ion-input
+            [(ngModel)]="password"
+            type="password"
+            [readonly]="isReadOnly"
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button color="success" (click)="changePass()" expand="block">
+          Change Password</ion-button
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button color="success" (click)="savePass()" expand="block">
+          Save Password</ion-button
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button color="danger" (click)="goLogout()" expand="block">
+          Logout</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

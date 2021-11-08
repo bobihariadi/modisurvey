@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Activity</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="btnPopover($event)">
+        <ion-icon slot="icon-only" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher
+    slot="fixed"
+    pullFactor="0.5"
+    pullMin="100"
+    pullMax="100"
+    (ionRefresh)="refreshData($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list class="ion-no-padding">
+    <ion-list-header color="light">
+      <ion-label class="ion-text-start ion-padding-vertical"
+        >{{labelHeader}}</ion-label
+      >
+    </ion-list-header>
+  </ion-list>
+  <ion-item (click)="goTo('availability')" button>
+    <div class="cnumber" lot="start">1</div>
+    <ion-label> Availability </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+  <ion-item (click)="goTo('visibility')" button>
+    <div class="cnumber" lot="start">2</div>
+    <ion-label> Visibility </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+  <ion-item (click)="confirmAlert()" button>
+    <div class="cnumber" lot="start">3</div>
+    <ion-label> Survey </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+  <ion-item (click)="goTo('preview')" button>
+    <div class="cnumber" lot="start">4</div>
+    <ion-label> Preview Visit </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+  <ion-item (click)="uploadVisit()" button>
+    <div class="cnumber" lot="start">5</div>
+    <ion-label> Upload Visit </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+  <!-- <ion-item (click)="goToConfirm()" button>
+    <div class="cnumber" lot="start">5</div>
+    <ion-label> End Visit </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item> -->
+</ion-content>

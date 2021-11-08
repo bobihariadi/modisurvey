@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>List My Outlet</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher
+    slot="fixed"
+    pullFactor="0.5"
+    pullMin="100"
+    pullMax="100"
+    (ionRefresh)="refreshData($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="showList">
+    <ion-card
+      *ngFor="let item of arrList"
+      (click)="routeVisit(item.id)"
+      color="{{item.status === '1' ? 'light': item.status === '3' ? 'warning' : 'success'}}"
+    >
+      <ion-card-content>
+        <ion-text> <p>{{item.name_outlet}}</p> </ion-text>
+        <ion-text> <p>{{item.address}}</p> </ion-text>
+        <ion-text>
+          <p>{{item.arr_status}}</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="!showList" class="scroll-content">
+    <ion-card *ngFor="let flist of fakeList">
+      <ion-card-header>
+        <ion-card-subtitle
+          ><ion-skeleton-text animated style="width: 30%"></ion-skeleton-text
+        ></ion-card-subtitle>
+        <ion-card-title
+          ><ion-skeleton-text animated style="width: 40%"></ion-skeleton-text
+        ></ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+        <h2>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </h2>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

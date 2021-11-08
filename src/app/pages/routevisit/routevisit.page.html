@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>On Route Visit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Kode Toko</ion-label>
+          <ion-input [(ngModel)]="kode" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Nama</ion-label>
+          <ion-input [(ngModel)]="nama" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Alamat</ion-label>
+          <ion-textarea
+            [(ngModel)]="alamat"
+            [readonly]="isReadonly"
+            rows="3"
+          ></ion-textarea>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Kelurahan</ion-label>
+          <ion-input [(ngModel)]="kel" [readonly]="isReadonly"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Kecamatan</ion-label>
+          <ion-input [(ngModel)]="kec" [readonly]="isReadonly"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Kota</ion-label>
+          <ion-input [(ngModel)]="kota" [readonly]="isReadonly"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Kode Pos</ion-label>
+          <ion-input [(ngModel)]="kodePos" [readonly]="isReadonly"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Kontak</ion-label>
+          <ion-input [(ngModel)]="kontak" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">No HP</ion-label>
+          <ion-input [(ngModel)]="noHp" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="ion-no-padding heading">
+          <ion-label color="success">GPS</ion-label>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Latitude</ion-label>
+          <ion-input [(ngModel)]="lat" readonly="true"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label position="fixed">Longitude</ion-label>
+          <ion-input [(ngModel)]="long" readonly="true"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-grid class="ion-margin-top">
+          <ion-row>
+            <ion-col>
+              <ion-button
+                disabled="{{isDisabled}}"
+                color="success"
+                shape="round"
+                expand="full"
+                (click)="startVisit()"
+              >
+                {{labelStart}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button
+                color="success"
+                shape="round"
+                expand="full"
+                (click)="saveEdit()"
+              >
+                {{labelButton}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,47 @@
+<ion-header translucent="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Main Menu</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="btnPopover($event)">
+        <ion-icon slot="icon-only" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher
+    slot="fixed"
+    pullFactor="0.5"
+    pullMin="100"
+    pullMax="100"
+    (ionRefresh)="refreshData($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-item class="ion-margin-top" (click)="goTo('itenary')" button>
+    <ion-icon slot="start" name="clipboard-outline"></ion-icon>
+    <ion-label> Itenary </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+  <ion-item (click)="goTo('myoutlet')" button>
+    <ion-icon slot="start" name="document-text-outline"></ion-icon>
+    <ion-label> My Outlet </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+  <ion-item (click)="goTo('newoutlet')" button>
+    <ion-icon name="create-outline" slot="start"></ion-icon>
+    <ion-label> New Outlet </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+  <ion-item (click)="goTo('performance')" button>
+    <ion-icon name="trending-up-outline" slot="start"></ion-icon>
+    <ion-label> Performance </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+  <ion-item (click)="goTo('akhirrute')" button>
+    <ion-icon name="cloud-upload-outline" slot="start"></ion-icon>
+    <ion-label> Upload data </ion-label>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+</ion-content>

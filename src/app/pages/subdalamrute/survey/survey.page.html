@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Survey</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="ion-no-padding">
+    <ion-list-header color="light">
+      <ion-label class="ion-text-start ion-padding-end"
+        >Jawab dan isilah survey</ion-label
+      >
+    </ion-list-header>
+  </ion-list>
+  <ion-item *ngFor="let list of arrList">
+    <ion-label>{{list.desc}}?&nbsp;</ion-label>
+    <ion-text color="danger" style="font-size: 12px"> (harus diisi)</ion-text>
+    <ion-input type="hidden" [(ngModel)]="idParam[list.id]"></ion-input>
+    <ion-select
+      [interfaceOptions]="customActionSheetOptions"
+      interface="action-sheet"
+      placeholder="Pilih"
+      [(ngModel)]="isYes[list.id]"
+    >
+      <ion-select-option value="N">Tidak</ion-select-option>
+      <ion-select-option value="Y">Ya</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <!-- <ion-item>
+    <ion-label>Ada PAGE HOOK <ion-text color="danger" style="font-size: 12px;" > (harus diisi)</ion-text></ion-label>
+    <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Pilih">
+      <ion-select-option value="" >-</ion-select-option>
+      <ion-select-option value="T">Tidak</ion-select-option>
+      <ion-select-option value="Y">Ya</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Ada CLIPSTRIP Twister <ion-text color="danger" style="font-size: 12px;" > (harus diisi)</ion-text></ion-label>
+    <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Pilih">
+      <ion-select-option value="" >-</ion-select-option>
+      <ion-select-option value="T">Tidak</ion-select-option>
+      <ion-select-option value="Y">Ya</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Ada CLIPSTRIP Mallow Pop <ion-text color="danger" style="font-size: 12px;" > (harus diisi)</ion-text></ion-label>
+    <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Pilih">
+      <ion-select-option value="" >-</ion-select-option>
+      <ion-select-option value="T">Tidak</ion-select-option>
+      <ion-select-option value="Y">Ya</ion-select-option>
+    </ion-select>
+  </ion-item> -->
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="full" color="success" (click)="confimData()"
+          >Simpan</ion-button
+        >
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" color="danger" (click)="myBackButton()"
+          >Batal</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

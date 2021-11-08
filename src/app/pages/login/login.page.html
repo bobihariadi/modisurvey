@@ -1,0 +1,114 @@
+<ion-content>
+  <ion-grid class="grid1">
+    <ion-row class="row1">
+      <ion-col> </ion-col>
+    </ion-row>
+
+    <ion-row class="row2">
+      <ion-col> </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="icon">
+    <img src="assets/img/b-dinus-icon.png" />
+    <p>PT DINUS CIPTA MANDIRI</p>
+  </div>
+
+  <ion-slide>
+    <div class="contaier-login">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">User ID</ion-label>
+              <ion-icon
+                name="person-outline"
+                slot="end"
+                class="ion-margin-top"
+              ></ion-icon>
+              <ion-input
+                [(ngModel)]="userId"
+                type="text"
+                required
+                autocomplete="off"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <br />
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-icon
+                [name]="!showPassword ? 'eye-outline' : 'eye-off-outline'"
+                slot="end"
+                class="ion-margin-top"
+                (click)="toggleShow()"
+              ></ion-icon>
+              <ion-input
+                [type]="!showPassword ? 'password' : 'text'"
+                required
+                [(ngModel)]="password"
+                autocomplete="off"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <br />
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Device ID</ion-label>
+              <ion-icon
+                name="phone-portrait-outline"
+                slot="end"
+                class="ion-margin-top"
+              ></ion-icon>
+              <ion-input
+                readonly="true"
+                [(ngModel)]="deviceID"
+                type="text"
+                required
+                autocomplete="off"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <div class="ion-text-end ion-text-8"></div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button
+              color="success"
+              shape="round"
+              (click)="goLogin()"
+              fill="solid"
+              expand="full"
+              disabled="{{isDisabled}}"
+            >
+              {{btnLabel}}
+              <ion-spinner
+                name="crescent"
+                *ngIf="isDisabled"
+                slot="end"
+              ></ion-spinner>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button
+              color="success"
+              shape="round"
+              expand="full"
+              disabled="{{isDisabled}}"
+              (click)="showSetting()"
+            >
+              setting
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-slide>
+</ion-content>

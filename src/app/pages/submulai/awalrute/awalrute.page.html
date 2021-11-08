@@ -1,0 +1,41 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mulai Kunjungan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="100" (ionRefresh)="refreshData($event)" >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list  class="ion-no-padding">
+    <ion-list-header color="light">
+      Jam Awal
+    </ion-list-header>
+  </ion-list> 
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input [(ngModel)]="jamAwal" type="text" required autocomplete="off" readonly></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-grid class="ion-no-padding" >
+    <ion-row >
+      <ion-col size="6" >
+        <ion-button expand="full" color="success" (click)="confimData('ok')" >Simpan</ion-button>  
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" color="danger" (click)="myBackButton()" >Batal</ion-button>  
+      </ion-col>
+    </ion-row>
+  </ion-grid>  
+</ion-footer>

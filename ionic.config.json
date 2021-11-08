@@ -1,5 +1,7 @@
 {
   "name": "modisurvey",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

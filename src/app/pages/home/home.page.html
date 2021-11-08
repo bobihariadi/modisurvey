@@ -1,0 +1,124 @@
+<ion-content
+  [fullscreen]="true"
+  scroll="true"
+  padding
+  no-bounce
+  overflow-scroll="true"
+>
+  <ion-grid class="grid-hdr">
+    <ion-row class="bg-hdr">
+      <ion-col>
+        <ion-row>
+          <ion-col size="12">
+            <div style="width: 50px; float: left">
+              <ion-avatar>
+                <img src="assets/icon/images.png" />
+              </ion-avatar>
+            </div>
+            <div style="margin-left: 80px">
+              <div class="ion-text-start">
+                <h5><ion-text color="light">Hai, {{fullName}}</ion-text></h5>
+              </div>
+              <div class="latsgo">
+                <ion-text color="light">Lets Go</ion-text>
+              </div>
+            </div>
+          </ion-col>
+          <!-- <ion-col size="8">
+              </ion-col> -->
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <div class="cls-total shadow">
+        <ion-row class="ion-text-center">
+          <ion-col color="success" size="6">
+            <div class="vl">
+              <h2>
+                <ion-text color="success" class="totalValue">10</ion-text>
+              </h2>
+              <p style="font-size: 12px">Total Achievement</p>
+            </div>
+          </ion-col>
+          <ion-col color="danger" size="6">
+            <h2><ion-text color="success" class="totalValue">15</ion-text></h2>
+            <p style="font-size: 12px">Total Visiting</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card (click)="clearData()" button>
+          <div class="card-div">
+            <ion-icon
+              color="light"
+              name="trash-outline"
+              size="large"
+            ></ion-icon>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle>Clear Data</ion-card-subtitle>
+          </ion-card-header>
+          <!-- <ion-card-content>
+            <div
+              class="progress-outer"
+              [style.color]="mulai <=20 ? '#008000' : '#fff'"
+            >
+              <div class="progress-inner" [style.width]="mulai + '%'">
+                {{mulai}}%
+              </div>
+            </div>
+            <div class="cls-progress ion-text-end">{{mulai}}%</div>
+          </ion-card-content> -->
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card (click)="getItenary()" button>
+          <div class="card-div">
+            <ion-icon
+              color="light"
+              name="cloud-download-outline"
+              size="large"
+            ></ion-icon>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle>Download Itenary</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card (click)="itemData()" button>
+          <div class="card-div">
+            <ion-icon
+              color="light"
+              name="cloud-download-outline"
+              size="large"
+            ></ion-icon>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle>Refresh<br />Item Data</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card (click)="outletData('upload')" button>
+          <div class="card-div">
+            <ion-icon
+              color="light"
+              name="cloud-download-outline"
+              size="large"
+            ></ion-icon>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle>Refresh<br />Outlet Data</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

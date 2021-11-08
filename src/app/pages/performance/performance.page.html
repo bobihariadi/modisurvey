@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Performance</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-margin">
+  <div class="ion-no-padding" style="margin: 0 100px 0 0px">
+    <ion-item class="ion-margin" lines="none">
+      <ion-label position="fixed">Bulan</ion-label>
+      <ion-input [(ngModel)]="bulan"></ion-input>
+    </ion-item>
+    <ion-item class="ion-margin" lines="none">
+      <ion-label position="fixed">Tahun</ion-label>
+      <ion-input [(ngModel)]="tahun"></ion-input>
+    </ion-item>
+  </div>
+  <ion-grid class="ion-margin">
+    <ion-row>
+      <ion-col size="6" class="ion-text-center">Status Outlet</ion-col>
+      <ion-col size="3" class="ion-text-center">Qty</ion-col>
+      <ion-col size="3" class="ion-text-center">%</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">Belum Dikunjungi</ion-col>
+      <ion-col size="3" class="ion-text-right">48</ion-col>
+      <ion-col size="3" class="ion-text-right">12%</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">Sudah Dikunjungi</ion-col>
+      <ion-col size="3" class="ion-text-right">35</ion-col>
+      <ion-col size="3" class="ion-text-right">88%</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">Tidak Dikunjungi</ion-col>
+      <ion-col size="3" class="ion-text-right">2</ion-col>
+      <ion-col size="3" class="ion-text-right">1%</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">Target Outlet</ion-col>
+      <ion-col size="3" class="ion-text-right">400</ion-col>
+      <ion-col size="3" class="ion-text-right">100%</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="ion-margin">
+    <ion-row>
+      <ion-col size="6" class="ion-text-center">Hasil Foto</ion-col>
+      <ion-col size="3" class="ion-text-center">Qty</ion-col>
+      <ion-col size="3" class="ion-text-center">%</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">Foto OK</ion-col>
+      <ion-col size="3" class="ion-text-right">48</ion-col>
+      <ion-col size="3" class="ion-text-right">12%</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">Foto Tidak OK</ion-col>
+      <ion-col size="3" class="ion-text-right">5</ion-col>
+      <ion-col size="3" class="ion-text-right">1.3%</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">Total Foto</ion-col>
+      <ion-col size="3" class="ion-text-right">375</ion-col>
+      <ion-col size="3" class="ion-text-right">100%</ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="ion-margin">
+    <ion-row>
+      <ion-col size="7" class="ion-text-center">Insentif</ion-col>
+      <ion-col size="5" class="ion-text-center">Rp</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="7"><b>Pencapaian 80-95%</b></ion-col>
+      <ion-col size="5" class="ion-text-right"
+        >{{ '1750000' | number:"1.0" }}</ion-col
+      >
+    </ion-row>
+    <ion-row>
+      <ion-col size="7"><b>Pencapaian > 95%</b></ion-col>
+      <ion-col size="5" class="ion-text-right">-</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

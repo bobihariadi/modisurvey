@@ -1,0 +1,9 @@
+ion-content {
+  --background: rgb(250, 249, 249) !important;
+  ion-card {
+    border-radius: 10px;
+    border: none;
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07) !important;
+  }
+}

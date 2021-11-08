@@ -1,0 +1,103 @@
+ion-content {
+  --background: rgba(250, 249, 249, 0.973) !important;
+}
+.grid-hdr {
+  padding: 0px;
+}
+.bg-hdr {
+  height: 135px;
+  border-radius: 0 0 20px 20px;
+  background: linear-gradient(45deg, green 0%, rgba(206, 238, 214, 0.2) 300%);
+}
+
+.item-trns {
+  border-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  // color: white;
+}
+
+ion-avatar img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 50px !important; //any size
+  max-height: 50px !important; //any size
+  margin-left: 20px;
+  margin-top: 8px;
+}
+
+.latsgo {
+  font-size: 14px;
+  margin-top: -10px;
+}
+
+.cls-total {
+  height: 90px;
+  background-color: #ffffff;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -40px;
+  border: 0px solid #ccc;
+  border-radius: 13px;
+}
+
+.totalValue {
+  font-weight: bold;
+}
+
+.shadow {
+  -webkit-box-shadow: 0px 3px 3px 0.5px #ece4e4;
+}
+
+.vl {
+  border-right: 2px solid #eae5e5;
+  height: 50px;
+  margin-right: -5px;
+}
+
+.card-div {
+  height: 60px;
+  background-color: green;
+  padding: 10px;
+  width: 60px;
+  border-radius: 15px;
+  margin: 15px 0px 0px 15px;
+  text-align: center;
+}
+
+ion-card {
+  border-radius: 10px;
+  // min-height: 200px;
+  -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.progress-outer {
+  width: 80%;
+  float: left;
+  text-align: center;
+  background-color: #d7d8da;
+  border: 0px solid #dcdcdc;
+  border-radius: 20px;
+  line-height: 15px;
+  margin-bottom: 10px;
+}
+.progress-inner {
+  min-width: 0%;
+  // width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0px;
+  border-radius: 20px;
+  background-color: green;
+  font-size: 10px;
+  border: 0px solid green;
+}
+
+.cls-progress {
+  float: right;
+  width: 25px;
+  margin-top: -1px;
+  font-size: 12px;
+  margin-right: -10px;
+}

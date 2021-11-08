@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Visibility</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher
+    slot="fixed"
+    pullFactor="0.5"
+    pullMin="100"
+    pullMax="100"
+    (ionRefresh)="refreshData($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="showList">
+    <ion-item
+      *ngFor="let list of arrList"
+      (click)="goToDetail(list.code, list.item)"
+      button
+    >
+      <ion-icon
+        *ngIf="list.have_photo !== 'Y' "
+        name="square-outline"
+        slot="start"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="list.have_photo == 'Y' "
+        name="checkbox-outline"
+        slot="start"
+      ></ion-icon>
+      <ion-label> {{list.item}} </ion-label>
+      <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row class="ion-padding ion-margin-top">
+        <ion-col>
+          <ion-button
+            color="success"
+            shape="round"
+            expand="full"
+            (click)="showPlanogram()"
+          >
+            Planogram
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+  <div *ngIf="!showList" class="scroll-content">
+    <ion-list>
+      <ion-item *ngFor="let flist of fakeList">
+        <ion-label>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+<!-- <ion-footer class="ion-no-border">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" color="primary" (click)="confirmData()"
+          >Submit</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer> -->

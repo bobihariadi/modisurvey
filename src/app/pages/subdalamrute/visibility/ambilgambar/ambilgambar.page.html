@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="backButton()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{params.descParam}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-top ion-text-center ion-padding-horizontal">
+  <div (click)="previewPhoto()">
+    <img src="{{picture}}" />
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-no-padding">
+      <ion-col size="6">
+        <ion-button
+          expand="full"
+          color="primary"
+          (click)="takePhoto()"
+          [disabled]="btnDisabled"
+          >Ambil Gambar</ion-button
+        >
+      </ion-col>
+      <ion-col size="6">
+        <ion-button
+          expand="full"
+          color="success"
+          (click)="savePhoto()"
+          [disabled]="btnDisabled"
+          >Simpan</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
