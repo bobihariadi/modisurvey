@@ -84,4 +84,20 @@ export class VisibilityPage implements OnInit {
     await this.getVisibility();
     event.target.complete();
   }
+
+  async bacaItem(param) {
+    let params = {
+      select: '*',
+      table: param,
+      where: '',
+      order: '',
+    };
+    this.database._getData(params).then(async (data) => {
+      const arrData = [];
+      for (var i = 0; i < data.rows.length; i++) {
+        arrData.push(data.rows.item(i));
+      }
+      console.log(arrData);
+    });
+  }
 }

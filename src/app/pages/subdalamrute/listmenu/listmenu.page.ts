@@ -148,18 +148,6 @@ export class ListmenuPage implements OnInit {
 
     // get visit activity id
     await this.getVisitActivity(); //ok
-
-    //send availability
-    await this.sendAvailability(); //ok
-
-    //send  visibility
-    await this.sendVisibility(); //ok
-
-    //send survey
-    await this.sendSurvey(); //ok
-
-    //update visit activities
-    await this.setVisitActivities();
   }
 
   async sendSurvey() {
@@ -240,7 +228,8 @@ export class ListmenuPage implements OnInit {
     headers = headers.append('Authorization', 'Bearer ' + this.token);
 
     const d = new Date();
-    let onlyDate = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+    let onlyDate =
+      d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
     let dateTime =
       onlyDate +
       ' ' +
@@ -258,6 +247,7 @@ export class ListmenuPage implements OnInit {
         end_at: dateTime,
         end_point_latitude: this.latitude,
         end_point_longitude: this.longitude,
+        status: 'finished',
       },
     };
 
@@ -273,7 +263,9 @@ export class ListmenuPage implements OnInit {
 
     this.http
       .put(
-        `${this.serverAddress}` + 'visit_activities/' + arrItenary['id'],
+        `${this.serverAddress}` +
+          'visit_activities/' +
+          arrItenary['activity_id'],
         arrParam,
         {
           headers: headers,
@@ -452,7 +444,8 @@ export class ListmenuPage implements OnInit {
     headers = headers.append('Authorization', 'Bearer ' + this.token);
 
     const d = new Date();
-    let onlyDate = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+    let onlyDate =
+      d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
     let dateTime =
       onlyDate +
       ' ' +
@@ -482,7 +475,8 @@ export class ListmenuPage implements OnInit {
       })
       .subscribe(
         async (data: any) => {
-          this.activity_id = data.body.visit_activity.id;
+          this.activity_id = await data.body.visit_activity.id;
+
           let params = {
             table: 'itenary',
             set: `activity_id='${data.body.visit_activity.id}',activity_code='${data.body.visit_activity.code}'`,
@@ -491,7 +485,19 @@ export class ListmenuPage implements OnInit {
 
           await this.updateData(params);
           console.log('-----------');
-          this.bacaItem('itenary');
+
+          //send availability
+          await this.sendAvailability(); //ok
+
+          //send  visibility
+          await this.sendVisibility(); //ok
+
+          //send survey
+          await this.sendSurvey(); //ok
+
+          //update visit activities
+          await this.setVisitActivities();
+          // this.bacaItem('itenary');
         },
         (err) => {
           this.showToast(err.error.msg);
@@ -500,7 +506,7 @@ export class ListmenuPage implements OnInit {
   }
 
   async cekVisited() {
-    this.bacaItem('itenary');
+    // this.bacaItem('itenary');
     return new Promise(async (resolve) => {
       let params = {
         select: '*',

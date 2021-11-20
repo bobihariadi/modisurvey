@@ -87,17 +87,17 @@ export class DatabaseService {
     );
 
     await this.databaseObj.executeSql(
-      `CREATE TABLE IF NOT EXISTS ${this.tables.visibility} (id_visibility VARCHAR(10) PRIMARY KEY, id_outlet VARCHAR(10), visibility_desc VARCHAR(200), have_photo VARCHAR(1) DEFAULT 'N')`,
+      `CREATE TABLE IF NOT EXISTS ${this.tables.visibility} (id_visibility VARCHAR(10), id_outlet VARCHAR(10), group_outlet INTEGER, visibility_desc VARCHAR(200), have_photo VARCHAR(1) DEFAULT 'N', PRIMARY KEY (id_visibility,id_outlet))`,
       []
     );
 
     await this.databaseObj.executeSql(
-      `CREATE TABLE IF NOT EXISTS ${this.tables.tx_photo} (id INTEGER PRIMARY KEY, id_visibility VARCHAR(10) NOT NULL UNIQUE, id_outlet VARCHAR(10), id_user INTEGER, image_blob BLOB, is_sync VARCHAR(1) DEFAULT 'N', date_create DATETIME DEFAULT CURRENT_TIMESTAMP)`,
+      `CREATE TABLE IF NOT EXISTS ${this.tables.tx_photo} (id INTEGER PRIMARY KEY, id_visibility VARCHAR(10) , id_outlet VARCHAR(10), id_user INTEGER, image_blob BLOB, is_sync VARCHAR(1) DEFAULT 'N', date_create DATETIME DEFAULT CURRENT_TIMESTAMP)`,
       []
     );
 
     await this.databaseObj.executeSql(
-      `CREATE TABLE IF NOT EXISTS ${this.tables.tx_survey} (id INTEGER PRIMARY KEY, id_outlet VARCHAR(10), survey_desc VARCHAR(200), id_user INTEGER, is_yes VARCHAR(1) DEFAULT 'N', is_sync VARCHAR(1) DEFAULT 'N' )`,
+      `CREATE TABLE IF NOT EXISTS ${this.tables.tx_survey} (id INTEGER , id_outlet VARCHAR(10), group_outlet INTEGER, survey_desc VARCHAR(200), id_user INTEGER, is_yes VARCHAR(1) DEFAULT 'N', is_sync VARCHAR(1) DEFAULT 'N', PRIMARY KEY (id, id_outlet))`,
       []
     );
 

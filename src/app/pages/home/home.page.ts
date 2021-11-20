@@ -191,6 +191,7 @@ export class HomePage implements OnInit {
             let itemData = {
               id_visibility: el.id,
               id_outlet: idOutlet,
+              group_outlet: groupOutlet,
               visibility_desc: el.name,
             };
 
@@ -200,8 +201,8 @@ export class HomePage implements OnInit {
           for (var i = 0; i < arrParam.length; i++) {
             let params = {
               table: 'visibility',
-              field: 'id_visibility,id_outlet,visibility_desc',
-              value: `'${arrParam[i].id_visibility}','${arrParam[i].id_outlet}','${arrParam[i].visibility_desc}'`,
+              field: 'id_visibility,id_outlet,group_outlet,visibility_desc',
+              value: `'${arrParam[i].id_visibility}','${arrParam[i].id_outlet}','${arrParam[i].group_outlet}','${arrParam[i].visibility_desc}'`,
             };
             await this.insertData(params);
           }
@@ -241,6 +242,7 @@ export class HomePage implements OnInit {
               let itemData = {
                 id: el.id,
                 id_outlet: idOutlet,
+                group_outlet: groupOutlet,
                 iduser: this.idUser,
                 survey_desc: el.question,
               };
@@ -252,8 +254,8 @@ export class HomePage implements OnInit {
           for (var i = 0; i < arrSurvey.length; i++) {
             let params = {
               table: 'tx_survey',
-              field: 'id,id_outlet,id_user,survey_desc',
-              value: `'${arrSurvey[i].id}','${arrSurvey[i].id_outlet}','${arrSurvey[i].iduser}','${arrSurvey[i].survey_desc}'`,
+              field: 'id,id_outlet,group_outlet, id_user,survey_desc',
+              value: `'${arrSurvey[i].id}','${idOutlet}','${groupOutlet}','${arrSurvey[i].iduser}','${arrSurvey[i].survey_desc}'`,
             };
             await this.insertData(params);
           }
@@ -262,6 +264,25 @@ export class HomePage implements OnInit {
           this.showToast(err.error.msg);
         }
       );
+  }
+
+  async getidGroupOutlet() {
+    return new Promise((resolve) => {
+      let params = {
+        select: '*',
+        table: 'outlet',
+        where: '',
+        order: '',
+      };
+      this.database._getData(params).then(async (data) => {
+        const arrData = [];
+        if (data.rows.length > 0) {
+          resolve(data.rows.item(0).group_outlet);
+        } else {
+          resolve('');
+        }
+      });
+    });
   }
 
   async getDataBasedOnGroupOutlet() {
@@ -285,13 +306,17 @@ export class HomePage implements OnInit {
           data.rows.item(i).group_outlet
         );
 
-        this.getSurveyNew(data.rows.item(i).id, data.rows.item(i).group_outlet);
+        await this.getSurveyNew(
+          data.rows.item(i).id,
+          data.rows.item(i).group_outlet
+        );
       }
-      console.log(arrData);
+      // console.log(arrData);
       setTimeout(async () => {
-        await this.bacaItem('tx_category');
+        //   await this.bacaItem('itenary');
+        //   await this.bacaItem('tx_category');
         await this.bacaItem('visibility');
-        await this.bacaItem('tx_survey');
+        //   await this.bacaItem('tx_survey');
       }, 4000);
     });
   }
@@ -621,7 +646,10 @@ export class HomePage implements OnInit {
           // this.bacaItem('item');
         },
         (err) => {
-          this.showToast(err.error.msg);
+          loading.dismiss();
+          this.showToast(
+            err.status + ' | ' + err.error.msg + '\n' + err.statusText
+          );
         }
       );
   }
@@ -685,13 +713,13 @@ export class HomePage implements OnInit {
               name: el.name,
               group: el.outlet_group.id,
               groupDesc: el.outlet_group.name,
-              address: 'Jl. Angsana Raya No.1',
+              address: el.address,
               kel: el.village.name,
               kec: el.district.name,
               kota: el.city.name,
               kdpos: el.postal_code.code,
-              kontak: 'Bobi Hariadi',
-              hp: '081374336102',
+              kontak: el.person_in_charge,
+              hp: el.phone_number,
               lat: el.latitude,
               long: el.longitude,
             };
@@ -732,7 +760,10 @@ export class HomePage implements OnInit {
           // this.bacaItem('outlet');
         },
         (err) => {
-          this.showToast(err.error.msg);
+          loading.dismiss();
+          this.showToast(
+            err.status + ' | ' + err.error.msg + '\n' + err.statusText
+          );
         }
       );
   }

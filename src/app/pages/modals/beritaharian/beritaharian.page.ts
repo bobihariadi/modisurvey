@@ -58,12 +58,12 @@ export class BeritaharianPage implements OnInit {
     headers.append('Content-Type', 'application/json; charset=utf-8');
     headers = headers.append('Authorization', 'Bearer ' + this.token);
 
-    const params = new HttpParams().set('announce_type', 'areas');
+    // const params = new HttpParams().set('announce_type', 'areas');
 
     this.http
       .get(`${this.serverAddress}` + 'announcements', {
         headers: headers,
-        params: params,
+        // params: params,
         observe: 'response',
       })
       .subscribe(
@@ -114,7 +114,8 @@ export class BeritaharianPage implements OnInit {
     headers = headers.append('Authorization', 'Bearer ' + this.token);
 
     const d = new Date();
-    let onlyDate = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+    let onlyDate =
+      d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
     let dateTime =
       onlyDate +
       ' ' +

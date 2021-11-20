@@ -155,6 +155,7 @@ export class RoutevisitPage implements OnInit {
     // this.bacaItem('itenary');
     let isTrue = await this.getItenary(this.idParam);
     if (isTrue) {
+      this.storageCtrl.set('idOutlet', this.kode);
       let param = {
         id: this.idParam,
         kode: this.kode,
@@ -186,7 +187,8 @@ export class RoutevisitPage implements OnInit {
       return false;
     }
     const d = new Date();
-    let onlyDate = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+    let onlyDate =
+      d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
     let dateTime =
       onlyDate +
       ' ' +

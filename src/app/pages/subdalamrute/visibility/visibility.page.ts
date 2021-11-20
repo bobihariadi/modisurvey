@@ -57,8 +57,13 @@ export class VisibilityPage implements OnInit {
   }
 
   async getVisibility() {
-    this.bacaItem('tx_photo');
-    let where = `where id_outlet='${this.idOutlet}'`;
+    this.storageCtrl.get('token').then(async (data) => {
+      console.log(data);
+    });
+    // await this.bacaItem('visibility');
+    await this.bacaItem('tx_photo');
+    let groupOutlet = await this.getGroupOutlet(this.idOutlet);
+    let where = `where id_outlet='${this.idOutlet}' and group_outlet='${groupOutlet}'`;
 
     let params = {
       select: 'id_visibility, id_outlet, visibility_desc, have_photo',
@@ -77,6 +82,25 @@ export class VisibilityPage implements OnInit {
         });
       }
       this.showList = true;
+    });
+  }
+
+  async getGroupOutlet(idoutlet) {
+    return new Promise((resolve) => {
+      let params = {
+        select: '*',
+        table: 'outlet',
+        where: 'where id_outlet =' + idoutlet,
+        order: '',
+      };
+      this.database._getData(params).then(async (data) => {
+        console.log(data);
+        if (data.rows.length > 0) {
+          resolve(data.rows.item(0).group_outlet);
+        } else {
+          resolve('');
+        }
+      });
     });
   }
 

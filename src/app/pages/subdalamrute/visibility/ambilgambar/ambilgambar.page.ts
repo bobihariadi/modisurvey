@@ -26,6 +26,7 @@ export class AmbilgambarPage implements OnInit {
   idOutlet: string;
   isExist: boolean = false;
   width: any;
+  idUser: any;
 
   constructor(
     private cameraPreview: CameraPreview,
@@ -60,6 +61,10 @@ export class AmbilgambarPage implements OnInit {
 
     this.platform.ready().then(async () => {
       if (this.platform.is('cordova')) {
+        await this.storageCtrl.get('dataLogin').then(async (data) => {
+          this.idUser = data.id;
+        });
+
         await this.database.createDatabase();
         await this.getPhoto();
       }
@@ -70,7 +75,7 @@ export class AmbilgambarPage implements OnInit {
     let param = {
       select: 'id, id_visibility, image_blob',
       table: 'tx_photo',
-      where: `WHERE id_visibility='${this.params.idParam}' `,
+      where: `WHERE id_visibility='${this.params.idParam}' and id_outlet='${this.idOutlet}' and is_sync='N' `,
       order: '',
     };
 
@@ -165,7 +170,7 @@ export class AmbilgambarPage implements OnInit {
       let params = {
         table: 'tx_photo',
         field: 'id_visibility,id_outlet,id_user,image_blob',
-        value: `'${this.params.idParam}','${this.idOutlet}','123','${this.base64Image}'`,
+        value: `'${this.params.idParam}','${this.idOutlet}','${this.idUser}','${this.base64Image}'`,
       };
       let result = await this.insertData(params);
       if (result) {

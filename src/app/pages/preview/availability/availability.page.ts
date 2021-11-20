@@ -55,6 +55,7 @@ export class AvailabilityPage implements OnInit {
   }
 
   async getCategory() {
+    // console.log(this.idOutlet);
     let where = `where id_outlet='${this.idOutlet}'`;
 
     let params = {
@@ -79,9 +80,12 @@ export class AvailabilityPage implements OnInit {
   }
 
   async getData() {
+    await this.bacaItem('item');
+    await this.bacaItem('tx_stok');
+    await this.bacaItem('tx_category');
     this.arrList = [];
     for (let a = 0; a < this.arrCategory.length; a++) {
-      let where = `where c.id_outlet='${this.idOutlet}' and a.category_id='${this.arrCategory[a].id}'`;
+      let where = `where c.id_outlet='${this.idOutlet}' and b.id_outlet='${this.idOutlet}' and a.category_id='${this.arrCategory[a].id}'`;
       let params = {
         select:
           'a.category_id, a.name_item,  ifnull(b.bagus,0) bagus, ifnull(b.rusak,0) rusak',
@@ -94,6 +98,7 @@ export class AvailabilityPage implements OnInit {
       await this.database._getData(params).then(async (data) => {
         let arrPush = [];
         for (var i = 0; i < data.rows.length; i++) {
+          console.log(data.rows.item(i));
           arrPush.push({
             desc: data.rows.item(i).name_item,
             bagus: data.rows.item(i).bagus,
@@ -111,5 +116,21 @@ export class AvailabilityPage implements OnInit {
     this.showList = false;
     await this.getCategory();
     event.target.complete();
+  }
+
+  async bacaItem(param) {
+    let params = {
+      select: '*',
+      table: param,
+      where: '',
+      order: '',
+    };
+    this.database._getData(params).then(async (data) => {
+      const arrData = [];
+      for (var i = 0; i < data.rows.length; i++) {
+        arrData.push(data.rows.item(i));
+      }
+      console.log(arrData);
+    });
   }
 }

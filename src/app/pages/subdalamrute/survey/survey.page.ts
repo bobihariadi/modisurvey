@@ -40,10 +40,12 @@ export class SurveyPage implements OnInit {
   }
 
   async getSurvey() {
-    let where = `where id_outlet='${this.idOutlet}'`;
+    // await this.bacaItem('tx_survey');
+    let groupOutlet = await this.getGroupOutlet(this.idOutlet);
+    let where = `where id_outlet='${this.idOutlet}' and group_outlet='${groupOutlet}'`;
 
     let params = {
-      select: 'id, id_outlet, survey_desc, is_yes',
+      select: 'id, id_outlet,group_outlet, survey_desc, is_yes',
       table: 'tx_survey',
       where: where,
       order: '',
@@ -59,6 +61,25 @@ export class SurveyPage implements OnInit {
         this.idParam[data.rows.item(i).id] = data.rows.item(i).id;
         this.isYes[data.rows.item(i).id] = data.rows.item(i).is_yes;
       }
+    });
+  }
+
+  async getGroupOutlet(idoutlet) {
+    return new Promise((resolve) => {
+      let params = {
+        select: '*',
+        table: 'outlet',
+        where: 'where id_outlet =' + idoutlet,
+        order: '',
+      };
+      this.database._getData(params).then(async (data) => {
+        console.log(data);
+        if (data.rows.length > 0) {
+          resolve(data.rows.item(0).group_outlet);
+        } else {
+          resolve('');
+        }
+      });
     });
   }
 
@@ -98,7 +119,9 @@ export class SurveyPage implements OnInit {
         let params = {
           table: 'tx_survey',
           set: `is_yes='${this.isYes[this.arrList[i].id]}'`,
-          where: `id = '${this.idParam[this.arrList[i].id]}'`,
+          where: `id = '${this.idParam[this.arrList[i].id]}' and id_outlet ='${
+            this.idOutlet
+          }' and is_sync='N'`,
         };
         await this.updateData(params);
       }
@@ -121,5 +144,21 @@ export class SurveyPage implements OnInit {
       cssClass: 'myToast',
     });
     toast.present();
+  }
+
+  async bacaItem(param) {
+    let params = {
+      select: '*',
+      table: param,
+      where: '',
+      order: '',
+    };
+    this.database._getData(params).then(async (data) => {
+      const arrData = [];
+      for (var i = 0; i < data.rows.length; i++) {
+        arrData.push(data.rows.item(i));
+      }
+      console.log(arrData);
+    });
   }
 }

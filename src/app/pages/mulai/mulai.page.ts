@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { on } from 'events';
 import { PopoverComponent } from 'src/app/components/popover/popover.component';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-mulai',
@@ -12,13 +13,28 @@ import { PopoverComponent } from 'src/app/components/popover/popover.component';
 export class MulaiPage implements OnInit {
   constructor(
     private popoverCtrl: PopoverController,
-    private router: Router
-  ) { }
+    private router: Router,
+    private database: DatabaseService
+  ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.database.createDatabase();
   }
 
-  refreshData(event) {
+  async refreshData(event) {
+    const d = new Date();
+    let onlyDate =
+      d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    let dateTime =
+      onlyDate +
+      ' ' +
+      d.getHours() +
+      ':' +
+      d.getMinutes() +
+      ':' +
+      d.getSeconds();
+
+    console.log(onlyDate);
     // this.page = 0;
     // this.showList = false;
     // this.searchTerm = '';
@@ -26,6 +42,7 @@ export class MulaiPage implements OnInit {
     // this.getData(event);
     event.target.complete();
     // event.target.disabled = false;
+    await this.bacaItem('tx_survey');
   }
 
   async goTo(param) {
@@ -37,12 +54,24 @@ export class MulaiPage implements OnInit {
       component: PopoverComponent,
       cssClass: 'my-custom-class',
       event: ev,
-      translucent: true
+      translucent: true,
     });
     await popover.present();
   }
 
-    
-
-
+  async bacaItem(param) {
+    let params = {
+      select: '*',
+      table: param,
+      where: '',
+      order: '',
+    };
+    this.database._getData(params).then(async (data) => {
+      const arrData = [];
+      for (var i = 0; i < data.rows.length; i++) {
+        arrData.push(data.rows.item(i));
+      }
+      console.log(arrData);
+    });
+  }
 }

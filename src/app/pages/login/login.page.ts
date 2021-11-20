@@ -52,6 +52,7 @@ export class LoginPage implements OnInit {
 
     this.platform.ready().then(async () => {
       if (this.platform.is('cordova')) {
+        await this.storageCtrl.set('sAddress', 'http://128.199.245.1/api/v1/');
         await this.database.createDatabase();
         await this.getUser();
         await this.getLatLong();

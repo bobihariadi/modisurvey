@@ -55,7 +55,10 @@ export class SurveyPage implements OnInit {
   }
 
   async getSurvey() {
-    let where = `where id_outlet='${this.idOutlet}'`;
+    // await this.bacaItem('tx_survey');
+    // let where = `where id_outlet='${this.idOutlet}'`;
+    let groupOutlet = await this.getGroupOutlet(this.idOutlet);
+    let where = `where id_outlet='${this.idOutlet}' and group_outlet='${groupOutlet}'`;
 
     let params = {
       select:
@@ -79,10 +82,45 @@ export class SurveyPage implements OnInit {
     });
   }
 
+  async getGroupOutlet(idoutlet) {
+    return new Promise((resolve) => {
+      let params = {
+        select: '*',
+        table: 'outlet',
+        where: 'where id_outlet =' + idoutlet,
+        order: '',
+      };
+      this.database._getData(params).then(async (data) => {
+        console.log(data);
+        if (data.rows.length > 0) {
+          resolve(data.rows.item(0).group_outlet);
+        } else {
+          resolve('');
+        }
+      });
+    });
+  }
+
   async refreshData(event) {
     this.fakeList = new Array(this.totalRow);
     this.showList = false;
     await this.getSurvey();
     event.target.complete();
+  }
+
+  async bacaItem(param) {
+    let params = {
+      select: '*',
+      table: param,
+      where: '',
+      order: '',
+    };
+    this.database._getData(params).then(async (data) => {
+      const arrData = [];
+      for (var i = 0; i < data.rows.length; i++) {
+        arrData.push(data.rows.item(i));
+      }
+      console.log(arrData);
+    });
   }
 }
