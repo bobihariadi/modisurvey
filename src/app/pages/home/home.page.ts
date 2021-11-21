@@ -708,14 +708,17 @@ export class HomePage implements OnInit {
           const arrGroup = [];
 
           data.body.outlets.forEach((el) => {
+            let keLurahan = el.village.name;
+            let kecamatan = el.district.name;
+
             let outletData = {
               id: el.id,
               name: el.name,
               group: el.outlet_group.id,
               groupDesc: el.outlet_group.name,
               address: el.address,
-              kel: el.village.name,
-              kec: el.district.name,
+              kel: keLurahan.replace(/'/g, ''),
+              kec: kecamatan.replace(/'/g, ''),
               kota: el.city.name,
               kdpos: el.postal_code.code,
               kontak: el.person_in_charge,
@@ -758,6 +761,7 @@ export class HomePage implements OnInit {
           loading.dismiss();
           this.showToast('Berhasil refresh item data');
           // this.bacaItem('outlet');
+          // this.bacaItem('group_outlet');
         },
         (err) => {
           loading.dismiss();
@@ -996,7 +1000,7 @@ export class HomePage implements OnInit {
   async insertData(params: any) {
     return new Promise((resolve) => {
       this.database._addData(params).then((data) => {
-        // console.log(data);
+        console.log(data);
         resolve(data);
       });
     });
@@ -1103,7 +1107,7 @@ export class HomePage implements OnInit {
       'tx_photo',
       'tx_survey',
       // 'item',
-      // 'outlet',
+      'outlet',
       'tx_merchandising',
     ];
 

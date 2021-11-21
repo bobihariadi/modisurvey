@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AlertController, Platform, ToastController } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { api_url } from 'src/config';
@@ -29,6 +29,7 @@ export class LoginPage implements OnInit {
   long: any = '';
 
   serverAddress: string;
+  port: string;
 
   constructor(
     private http: HttpClient,
@@ -38,8 +39,7 @@ export class LoginPage implements OnInit {
     private platform: Platform,
     private device: Device,
     public database: DatabaseService,
-    private geoCtrl: Geolocation,
-    private alertCtrl: AlertController
+    private geoCtrl: Geolocation
   ) {}
 
   async ngOnInit() {
@@ -53,6 +53,7 @@ export class LoginPage implements OnInit {
     this.platform.ready().then(async () => {
       if (this.platform.is('cordova')) {
         await this.storageCtrl.set('sAddress', 'http://128.199.245.1/api/v1/');
+        await this.storageCtrl.set('sPort', '8080');
         await this.database.createDatabase();
         await this.getUser();
         await this.getLatLong();
@@ -120,7 +121,7 @@ export class LoginPage implements OnInit {
     var headers = new HttpHeaders();
     headers.append('Accept', 'application/json');
     headers.append('Content-Type', 'application/json; charset=utf-8');
-    headers = headers.append('device-id', '123456');
+    headers = headers.append('device-id', this.deviceID);
 
     // const httpOptions = {
     //   headers: new HttpHeaders({

@@ -71,7 +71,7 @@ export class RoutevisitPage implements OnInit {
   async getOutlet() {
     let params = {
       select: 'b.*, a.status',
-      table: 'itenary a left join outlet b on a.id_outlet=b.id_outlet',
+      table: 'outlet b left join  itenary a on a.id_outlet=b.id_outlet',
       where: 'WHERE a.id = ' + this.idParam,
       order: '',
     };
@@ -101,6 +101,10 @@ export class RoutevisitPage implements OnInit {
         this.isDisabled = true;
       }
     });
+
+    if (this.idParam == 'null') {
+      this.isDisabled = true;
+    }
   }
 
   async saveEdit() {

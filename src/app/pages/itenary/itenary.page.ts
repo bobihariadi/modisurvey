@@ -37,7 +37,7 @@ export class ItenaryPage implements OnInit {
   async getItenary() {
     let params = {
       select:
-        'a.id, b.name_outlet, b.address, a.status, case when a.status= "1" then "Belum dikunjungi" when a.status= "2" then "Sudah dikunjungi" when a.status="3" then "Pending" else "Void" end arr_status',
+        'a.id, b.name_outlet, b.address, a.status, case when a.status= "1" then "Belum dikunjungi" when a.status= "2" then "Sudah dikunjungi" when a.status="3" then "Pending" when a.status="4" then "Void" else "Belum jadwal" end arr_status',
       table: 'itenary a left join outlet b on a.id_outlet = b.id_outlet',
       where: '',
       order: 'ORDER BY a.id ASC',

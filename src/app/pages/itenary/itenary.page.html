@@ -22,12 +22,21 @@
     <ion-card
       *ngFor="let item of arrList"
       (click)="routeVisit(item.id)"
-      color="{{item.status === '1' ? 'light': item.status === '3' ? 'warning' : 'success'}}"
+      color="light"
     >
       <ion-card-content>
         <ion-text> <p>{{item.name_outlet}}</p> </ion-text>
-        <ion-text> <p>{{item.address}}</p> </ion-text>
-        <ion-text> <p>{{item.arr_status}}</p> </ion-text>
+        <ion-text>
+          <p class="ion-padding-bottom">{{item.address}}</p>
+        </ion-text>
+        <ion-badge
+          color="{{item.status === '1' ? 'medium': item.status === '3' ? 'warning' : item.status === '2' ? 'success': item.status === '4' ? 'tertiary': 'light'}}"
+          class="ion-padding-horizontal"
+        >
+          <ion-text>
+            <p>{{item.arr_status}}</p>
+          </ion-text>
+        </ion-badge>
       </ion-card-content>
     </ion-card>
 

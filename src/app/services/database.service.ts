@@ -18,6 +18,7 @@ export class DatabaseService {
     tx_photo: 'tx_photo',
     tx_merchandising: 'tx_merchandising',
     group_outlet: 'group_outlet',
+    news: 'news',
   };
 
   constructor(private sqlite: SQLite) {}
@@ -108,6 +109,11 @@ export class DatabaseService {
 
     await this.databaseObj.executeSql(
       `CREATE TABLE IF NOT EXISTS ${this.tables.group_outlet} (id INTEGER PRIMARY KEY, code VARCHAR(10), name VARCHAR(100), max_item INTEGER, planogram BLOB )`,
+      []
+    );
+
+    await this.databaseObj.executeSql(
+      `CREATE TABLE IF NOT EXISTS ${this.tables.news} (id INTEGER PRIMARY KEY, name VARCHAR(200), date_start VARCHAR(12), date_end VARCHAR(12), description TEXT, is_hot_news VARCHAR(10))`,
       []
     );
   }

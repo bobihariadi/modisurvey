@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
@@ -24,9 +25,11 @@ export class AccountPage implements OnInit {
   hp: string = '081374336102';
   password: string = 'pass123abc';
   isReadOnly: boolean = true;
+  lChangeButton: string = 'Change Password';
 
   serverAddress: string;
   port: string;
+  token: string;
 
   constructor(
     private alertCtrl: AlertController,
@@ -34,13 +37,26 @@ export class AccountPage implements OnInit {
     private loadingCtrl: LoadingController,
     private router: Router,
     private platform: Platform,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private http: HttpClient
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.platform.ready().then(async () => {
+      if (this.platform.is('cordova')) {
+        await this.storageCtrl.create();
+        this.storageCtrl.get('dataLogin').then(async (data) => {
+          this.nama = data.name;
+          this.userID = data.id;
+        });
+        this.storageCtrl.get('token').then(async (data) => {
+          this.token = data;
+        });
+      }
+    });
+  }
 
   async actLogout() {
-    await this.storageCtrl.create();
     const loading = await this.loadingCtrl.create({
       cssClass: 'my-custom-class',
       message: 'Please wait...',
@@ -58,13 +74,32 @@ export class AccountPage implements OnInit {
       }
     });
 
-    this.storageCtrl.clear();
+    var headers = new HttpHeaders();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json; charset=utf-8');
+    headers = headers.append('Authorization', 'Bearer ' + this.token);
 
-    await this.storageCtrl.set('sAddress', this.serverAddress);
-    await this.storageCtrl.set('sPort', this.port);
+    this.http
+      .delete(`${this.serverAddress}` + 'sessions/' + this.userID, {
+        headers: headers,
+        observe: 'response',
+      })
+      .subscribe(
+        async (data: any) => {
+          this.storageCtrl.clear();
 
-    loading.dismiss();
-    this.router.navigate(['login'], { replaceUrl: true });
+          await this.storageCtrl.set('sAddress', this.serverAddress);
+          await this.storageCtrl.set('sPort', this.port);
+
+          await loading.dismiss();
+          await this.showToast(data.body.message);
+          this.router.navigate(['login'], { replaceUrl: true });
+        },
+        (err) => {
+          loading.dismiss();
+          this.showToast(err.error.msg);
+        }
+      );
   }
 
   async goLogout() {
@@ -100,7 +135,13 @@ export class AccountPage implements OnInit {
   }
 
   changePass() {
-    this.isReadOnly = false;
+    if (this.isReadOnly) {
+      this.isReadOnly = false;
+      this.lChangeButton = 'Cancel';
+    } else {
+      this.isReadOnly = true;
+      this.lChangeButton = 'Change Password';
+    }
   }
 
   async savePass() {
@@ -136,11 +177,41 @@ export class AccountPage implements OnInit {
     });
     await loading.present();
 
-    setTimeout(() => {
-      loading.dismiss();
-      this.showToast('Berhasil simpan password');
-      this.isReadOnly = true;
-    }, 4000);
+    await this.storageCtrl.get('sAddress').then(async (val) => {
+      if (val) {
+        this.serverAddress = val;
+      }
+    });
+
+    var headers = new HttpHeaders();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json; charset=utf-8');
+    headers = headers.append('Authorization', 'Bearer ' + this.token);
+
+    let arrParam = {
+      user: {
+        password: this.password,
+      },
+    };
+
+    this.http
+      .put(`${this.serverAddress}` + 'sessions/update', arrParam, {
+        headers: headers,
+        observe: 'response',
+      })
+      .subscribe(
+        async (data: any) => {
+          loading.dismiss();
+          this.showToast('Berhasil simpan password');
+          this.isReadOnly = true;
+        },
+        (err) => {
+          loading.dismiss();
+          this.showToast(err.error.msg);
+        }
+      );
+
+    setTimeout(() => {}, 4000);
   }
 
   async showToast(param) {
