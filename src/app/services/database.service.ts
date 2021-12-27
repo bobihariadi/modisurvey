@@ -98,7 +98,7 @@ export class DatabaseService {
     );
 
     await this.databaseObj.executeSql(
-      `CREATE TABLE IF NOT EXISTS ${this.tables.tx_survey} (id INTEGER , id_outlet VARCHAR(10), group_outlet INTEGER, survey_desc VARCHAR(200), id_user INTEGER, is_yes VARCHAR(1) DEFAULT 'N', is_sync VARCHAR(1) DEFAULT 'N', PRIMARY KEY (id, id_outlet))`,
+      `CREATE TABLE IF NOT EXISTS ${this.tables.tx_survey} (id INTEGER , id_outlet VARCHAR(10), group_outlet INTEGER, survey_desc VARCHAR(200), id_user INTEGER, is_yes VARCHAR(1) , is_sync VARCHAR(1) DEFAULT 'N', PRIMARY KEY (id, id_outlet))`,
       []
     );
 

@@ -193,7 +193,7 @@ export class AkhirrutePage implements OnInit {
           this.showToast('Selesai');
           this.loadingCtrl.dismiss();
           setTimeout(() => {
-            this.router.navigate(['home']);
+            this.router.navigate(['tabs/tabs/home']);
           }, 2000);
         },
         (err) => {

@@ -642,7 +642,7 @@ export class HomePage implements OnInit {
           }
 
           loading.dismiss();
-          this.showToast('Berhasil refresh item data');
+          this.showToast('Berhasil refresh data item');
           // this.bacaItem('item');
         },
         (err) => {
@@ -759,7 +759,7 @@ export class HomePage implements OnInit {
           }
 
           loading.dismiss();
-          this.showToast('Berhasil refresh item data');
+          this.showToast('Berhasil refresh data Outlet');
           // this.bacaItem('outlet');
           // this.bacaItem('group_outlet');
         },
@@ -993,7 +993,7 @@ export class HomePage implements OnInit {
     }
 
     loading.dismiss();
-    this.showToast('Berhasil refresh item data');
+    this.showToast('Berhasil refresh data item');
     this.bacaItem('item');
   }
 
@@ -1048,7 +1048,7 @@ export class HomePage implements OnInit {
             () => (this.backButtonPressedOnceToExit = false)
           );
           this.backButtonPressedOnceToExit = true;
-          this.showToast('Press back button twice to exit');
+          this.showToast('Tekan tombol kembali dua kali untuk keluar');
         }
       }
     });
@@ -1121,7 +1121,7 @@ export class HomePage implements OnInit {
     }
 
     loading.dismiss();
-    this.showToast('Data cleared');
+    this.showToast('Berhasil clear data');
   }
 
   async deleteData(params: any) {

@@ -133,9 +133,9 @@ export class LoginPage implements OnInit {
     // };
 
     this.isDisabled = true;
-    this.btnLabel = 'Please wait... ';
+    this.btnLabel = 'Mohon tunggu... ';
     if (!this.userId || !this.password) {
-      this.showToast('User ID or Password can not empty');
+      this.showToast('User ID atau Password harus diisi');
       this.btnLabel = 'Login';
       this.isDisabled = false;
       return false;
@@ -192,7 +192,7 @@ export class LoginPage implements OnInit {
       } else {
         timer(1000).subscribe(() => (this.backButtonPressedOnceToExit = false));
         this.backButtonPressedOnceToExit = true;
-        this.showToast('Press back button twice to exit');
+        this.showToast('Tekan tombol kembali dua kali untuk keluar');
       }
     });
   }

@@ -81,7 +81,7 @@ export class SettingPage implements OnInit {
 
     const loading = await this.loadingCtrl.create({
       cssClass: 'my-custom-class',
-      message: 'Mohon menunggu...',
+      message: 'Mohon tunggu...',
     });
     await loading.present();
 
